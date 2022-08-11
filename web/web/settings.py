@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,14 +121,14 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_DIR = BASE_DIR + '/static'
+STATIC_DIR = str(BASE_DIR) + '/static'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-STATIC_ROOT = BASE_DIR + '/.static_root'
+STATIC_ROOT = str(BASE_DIR) + '/.static_root'
 
 MEDIA_URL = "/thumbnail/"   #맨 앞에 /를 사용하여 절대경로로 지정
-MEDIA_ROOT = BASE_DIR + '/static' + '/thumbnail'
+MEDIA_ROOT = str(BASE_DIR) + '/static' + '/thumbnail'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
