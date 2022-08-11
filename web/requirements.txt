@@ -1,0 +1,4 @@
+django
+mysqlclient
+argon2-cffi
+uwsgi

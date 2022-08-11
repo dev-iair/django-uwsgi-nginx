@@ -1,0 +1,41 @@
+version: "3"
+services:
+  django_uwsgi:
+    container_name: django_uwsgi
+    build:
+      context: ./web
+    stdin_open: true
+    tty: true 
+    networks:
+      network:
+        ipv4_address: 172.29.0.2
+    restart: always
+    volumes: 
+        - ./web:/app/web
+        - ./log/uwsgi:/log
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    stdin_open: true
+    tty: true 
+    ports:
+        - "8025:80"
+    networks:
+      network:
+        ipv4_address: 172.29.0.3
+    restart: always
+    volumes:
+        - ./web:/app/web
+        - ./log/nginx:/log
+        - ./web/static:/static
+    depends_on : 
+        - django_uwsgi
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.29.0.0/24
+          gateway: 172.29.0.1
